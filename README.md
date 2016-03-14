@@ -36,6 +36,7 @@ All modules have been put through [pylint](https://www.pylint.org/) with default
 
 Module  | Contents
 ------  | --------
+hello   | a simple routine inspired by the K&R Hello World program
 
 ---
 
