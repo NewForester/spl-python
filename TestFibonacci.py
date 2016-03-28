@@ -1,10 +1,14 @@
 """
-    unit test for fibonacci.py
+    unit test for fib_*.py
 
 Verifies the fibonacci() function returns the correct value for
 the first 10 terms of the Fibonacci series.
 
 By induction, the function works for all other positive integers.
+
+The test is run for two implementations of fibonacci():
+  - exponential complexity (dumb implementation)
+  - linear complexity (inspired by functional programming)
 
 """
 
@@ -13,11 +17,12 @@ MIT Licence @ https://opensource.org/licenses/MIT"""
 
 import unittest
 
-from fibonacci import fibonacci
+import fib_exponential as exponential
+import fib_linear as linear
 
 class TestHello (unittest.TestCase):
     """
-    test class for fibonacci.py
+    test class for fib_*.py
     """
     def setUp (self):
         """
@@ -35,13 +40,25 @@ class TestHello (unittest.TestCase):
         """
         pass    # print ("\nTear down")
 
-    def test_fibonacci (self):
+    def test_exponential_fibonacci (self):
         """
-        The test case for fibonacci() in fibonacci.py.
+        The test case for fibonacci() in fib_exponential.py.
+        """
+        self._run_test("exponential fibonacci algorithm", exponential.fibonacci)
 
-        Verifies the function for the first 10 terms of the Fibonacci series.
+    def test_linear_fibonacci (self):
         """
-        print("\n{0} ...".format("test fibonacci"))
+        The test case for fibonacci() in fib_linear.py.
+        """
+        self._run_test("linear fibonacci algorithm", linear.fibonacci)
+
+    def _run_test (self, msg, fibonacci):
+        """
+        Run a simple test of an implementation of the Fibonacci series.
+
+        Verifies the function under test returns the correct result for the first 10 terms of the series.
+        """
+        print("\nTest {0} ...".format(msg))
 
         nn, mm = 1, 0
 
