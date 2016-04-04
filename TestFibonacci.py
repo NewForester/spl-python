@@ -6,9 +6,10 @@ the first 10 terms of the Fibonacci series.
 
 By induction, the function works for all other positive integers.
 
-The test is run for two implementations of fibonacci():
+The test is run for three implementations of fibonacci():
   - exponential complexity (dumb implementation)
   - linear complexity (inspired by functional programming)
+  - log(n) complexity (as seen on Wikipedia)
 
 """
 
@@ -19,6 +20,7 @@ import unittest
 
 import fib_exponential as exponential
 import fib_linear as linear
+import fib_logn as logn
 
 class TestHello (unittest.TestCase):
     """
@@ -51,6 +53,12 @@ class TestHello (unittest.TestCase):
         The test case for fibonacci() in fib_linear.py.
         """
         self._run_test("linear fibonacci algorithm", linear.fibonacci)
+
+    def test_logn_fibonacci (self):
+        """
+        The test case for fibonacci() in fib_logn.py.
+        """
+        self._run_test("logn fibonacci algorithm", logn.fibonacci)
 
     def _run_test (self, msg, fibonacci):
         """
