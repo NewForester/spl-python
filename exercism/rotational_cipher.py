@@ -1,37 +1,24 @@
 """
     Python 3 solution to the Exercism 'rotational cypher' exercise
 """
+
+LOWER_ALPHA = "abcdefghijklmnopqrstuvwxyz"
+UPPER_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 def rotate(text, key):
     """
     return text encrypted using key and the rotational cypher method
     """
-    def encrypt(char, key):
-        """
-        encrypt a single character using key and the rotational cypher method
-        """
-        if char.islower():
-            base = 'a'
+    key = key % 26
 
-        elif char.isupper():
-            base = 'A'
+    lower = LOWER_ALPHA[key:] + LOWER_ALPHA[:key]
+    upper = UPPER_ALPHA[key:] + UPPER_ALPHA[:key]
 
-        else:
-            return char
+    table = str.maketrans(LOWER_ALPHA + UPPER_ALPHA, lower + upper)
 
-        return chr((ord(char) - ord(base) + key) % 26  + ord(base))
-
-    return ''.join([encrypt(c, key) for c in text])
+    return text.translate(table)
 
 ##
-## Quite a variation in solutions.
-##
-## Mine was not the only solution with a list comprehension and a join.
-##
-## Almost half constructed a look-up table, the others used ord() and chr().
-##
-## Three different approaches to look-up table constructions.
-##
-## One used str.maketrans() and str.translate().  Nice.
-##
-## The look-up tables were built for each call.  Tut.
+## New iteration that uses the translate table support of the string type.
+## Someone liked this.  So do I:  straight line code.
 ##
