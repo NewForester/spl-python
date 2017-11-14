@@ -7,8 +7,10 @@ def is_isogram(string):
     """
     string = string.lower()
 
-    return not any(map(lambda c: c.isalpha() and string.count(c) != 1, string))
+    return not any(string.count(c) != 1 for c in string if c.isalpha())
 
 ##
-## No other solution I examined used two higher level functions or a lambda.
+## Pylint complained about my use of map + lambda.
+## Apparently deprecated in favour of list comprehensions
+## but generator expressions, as here, are to be preferred.
 ##
