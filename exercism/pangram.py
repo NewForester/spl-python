@@ -5,12 +5,12 @@ def is_pangram(sentence):
     """
     return true if 'sentence' is an pangram
     """
-    alpha = 'abcdefghijklmnopqrstuvwxyz'
-
     sentence = sentence.lower()
 
-    return all(map(lambda c: sentence.find(c) != -1, alpha))
+    return all(sentence.find(c) != -1 for c in 'abcdefghijklmnopqrstuvwxyz')
 
 ##
-## No other solution I examined used two higher level functions or a lambda.
+## Pylint complained about my use of map + lambda.
+## Apparently deprecated in favour of list comprehensions
+## but generator expressions, as here, are to be preferred.
 ##
