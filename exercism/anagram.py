@@ -1,29 +1,28 @@
 """
     Python 3 solution to the Exercism 'anagram' exercise
 """
+from collections import Counter
+
 def detect_anagrams(word, candidates):
     """
-    return the list of candidates that are anagrams of word
+    return the list (grr) of candidates that are anagrams of word
     """
-    (lower, length) = (word.lower(), len(word))
+    lower = word.lower()
+    counts = Counter(lower)
 
-    slower = sorted(lower)
-
-    def check_anagram(wanabee):
+    def yield_anagram():
         """
-        check lower case candidate
+        return the anagrams of word one by one
         """
-        if len(wanabee) != length:
-            return False
-        if wanabee == lower:
-            return False
-        return sorted(wanabee) == slower
+        for candidate in candidates:
+            lower_candidate = candidate.lower()
+            if Counter(lower_candidate) == counts:
+                if lower_candidate != lower:
+                    yield candidate
 
-    return [C for C in candidates if check_anagram(C.lower())]
+    return list(yield_anagram())
 
 ##
-## I used sorted for comparison purposes.  Is there a better way ?
-##
-## Not among the exercises I saw.  None checked the length, several sorted
-## the word for every candidate.  I think all would take longer to run.
+## This iteration uses Counter instead of sorted() but the real interest here
+## is the attempt to use a generator.  Sadly the test cases are a tad dumb.
 ##
